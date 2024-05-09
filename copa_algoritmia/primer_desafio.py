@@ -10,7 +10,8 @@ def pases():
         nombre, camiseta = random.choice(equipo_australiano)
     posible_pase = random.choice([0,1])
     tiempo_partido = random.choice([0,60])
-    return equipo, camiseta, nombre, posible_pase, tiempo_partido
+    res_string = f"{equipo};{camiseta};{nombre};{posible_pase};{tiempo_partido}"
+    return res_string
 
 # Se crean dos listas con cada equipo y dentro se encuentran varias tuplas con los datos solicitados, este tipo de colección se utiliza para evitar la modificación de los mismos.
 equipo_argentino = [("Agustina Gorzelany", 7),
