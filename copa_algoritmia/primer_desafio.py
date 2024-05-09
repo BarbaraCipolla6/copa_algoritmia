@@ -4,7 +4,7 @@ import random
 # Se crean dos listas con cada equipo y dentro se encuentran varias tuplas con los datos solicitados, este tipo de colección se utiliza para evitar la modificación de los mismos.
 equipo_argentino = [("Sofía Toccalino", 2),
                     ("Agustina Gorzelany", 3),
-                    ("Valentina Raposo", 4)
+                    ("Valentina Raposo", 4),
                     ("Agostina Alonso", 5),
                     ("María Forcherio", 6),
                     ("Agustina Albertarrio", 7),
