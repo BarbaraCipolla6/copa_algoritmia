@@ -54,17 +54,28 @@ def contarPases(eventos):
         nombre = arr[2]
         posible_pase = arr[3]
 
+        # Si no tenemos un record de esta jugadora, crear un diccionario nuevo con sus datos
         visto = nombre in jugadores_visto
         if not visto:
             jugadores_visto.append(nombre)
+
+            pases_bien = 0
+            pases_mal = 0
+
+            if posible_pase == '1':
+                pases_bien = 1
+            if posible_pase == '0':
+                pases_mal = 1
+
+            porcentaje = (pases_bien / 1) * 100
 
             jugador_dict = {
             'numero': camiseta,
             'nombre': nombre, 
             'cantidad_pases': 1,
-            'pases_bien': 1 if posible_pase == '1' else 0, 
-            'pases_mal': 1 if posible_pase == '0' else 0, 
-            'porcentaje': 100.00 if posible_pase == '1' else 0.00
+            'pases_bien': pases_bien, 
+            'pases_mal': pases_mal, 
+            'porcentaje': '{:.2f}'.format(porcentaje)
             }
         
             if equipo == 'Australia':
@@ -72,15 +83,52 @@ def contarPases(eventos):
             elif equipo == 'Argentina':
                 argentina_pases.append(jugador_dict)
 
+        # Si tenemos un record de esta jugadora, encontramos su diccionario y actualizamos sus datos
+        if visto:
+            if equipo == 'Australia':
+                for dict in australia_pases:
+                    if dict['nombre'] == nombre:
+                        cantidad_pases = dict['cantidad_pases'] + 1
+                        pases_bien = dict['pases_bien']
+                        pases_mal = dict['pases_mal']
+                        porcentaje = dict['porcentaje']
 
+                        if posible_pase == '1':
+                            pases_bien += 1
+                        elif posible_pase == '0':
+                            pases_mal += 1
 
+                        porcentaje = (pases_bien / cantidad_pases) * 100
 
+                        dict.update({'cantidad_pases': cantidad_pases, 
+                                     'pases_bien': pases_bien,
+                                     'pases_mal': pases_mal,
+                                     'porcentaje': '{:.2f}'.format(porcentaje)
+                                     })
+            elif equipo == 'Argentina':
+                for dict in argentina_pases:
+                    if dict['nombre'] == nombre:
+                        cantidad_pases = dict['cantidad_pases'] + 1
+                        pases_bien = dict['pases_bien']
+                        pases_mal = dict['pases_mal']
+                        porcentaje = dict['porcentaje']
+
+                        if posible_pase == '1':
+                            pases_bien += 1
+                        elif posible_pase == '0':
+                            pases_mal += 1
+
+                        porcentaje = (pases_bien / cantidad_pases) * 100
+                        
+                        dict.update({'cantidad_pases': cantidad_pases, 
+                                     'pases_bien': pases_bien,
+                                     'pases_mal': pases_mal,
+                                     'porcentaje': '{:.2f}'.format(porcentaje)
+                                     })
 
     australia = {'Australia': australia_pases}
     argentina = {'Argentina': argentina_pases}
 
-    print(jugadores_visto)
-    
     print([australia, argentina])
 
 # Crear un nuevo archivo e escribir 50.000 eventos aleatorios
@@ -103,7 +151,3 @@ def crearArchivo():
 # Ejecutar programa
 if __name__ == "__main__":
     crearArchivo()
-
-# [{'Australia': [{'numero': '10', 'nombre': 'Katrina P', 'cantidad_pases': 454,
-# 'pases_bien': 243, 'pases_mal': 211, 'porcentaje': 53.15}, {}]}, 
-# {'Argentina': []}]
