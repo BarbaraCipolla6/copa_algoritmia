@@ -40,6 +40,49 @@ def pases():
 
     return res_string
 
+# Contar los pases buenos y malos para cada jugador
+def contarPases(eventos):
+    australia_pases = []
+    argentina_pases = []
+
+    jugadores_visto = []
+
+    for evento in eventos:
+        arr = evento.split(';')
+        equipo = arr[0]
+        camiseta = arr[1]
+        nombre = arr[2]
+        posible_pase = arr[3]
+
+        visto = nombre in jugadores_visto
+        if not visto:
+            jugadores_visto.append(nombre)
+
+            jugador_dict = {
+            'numero': camiseta,
+            'nombre': nombre, 
+            'cantidad_pases': 1,
+            'pases_bien': 1 if posible_pase == '1' else 0, 
+            'pases_mal': 1 if posible_pase == '0' else 0, 
+            'porcentaje': 100.00 if posible_pase == '1' else 0.00
+            }
+        
+            if equipo == 'Australia':
+                australia_pases.append(jugador_dict)
+            elif equipo == 'Argentina':
+                argentina_pases.append(jugador_dict)
+
+
+
+
+
+    australia = {'Australia': australia_pases}
+    argentina = {'Argentina': argentina_pases}
+
+    print(jugadores_visto)
+    
+    print([australia, argentina])
+
 # Crear un nuevo archivo e escribir 50.000 eventos aleatorios
 def crearArchivo():
     archivo_pases = open("pases.txt", "w", encoding='utf-8')        
@@ -54,8 +97,13 @@ def crearArchivo():
             eventos.append(f"{evento}")
         cont_pases += 1
 
+    contarPases(eventos)
     archivo_pases.writelines(eventos)
 
 # Ejecutar programa
 if __name__ == "__main__":
     crearArchivo()
+
+# [{'Australia': [{'numero': '10', 'nombre': 'Katrina P', 'cantidad_pases': 454,
+# 'pases_bien': 243, 'pases_mal': 211, 'porcentaje': 53.15}, {}]}, 
+# {'Argentina': []}]
