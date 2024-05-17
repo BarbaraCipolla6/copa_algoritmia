@@ -125,11 +125,16 @@ def contarPases(eventos):
                                      'pases_mal': pases_mal,
                                      'porcentaje': '{:.2f}'.format(porcentaje)
                                      })
+    australia_pases.sort(key=lambda x: x['porcentaje'], reverse=True)
+    argentina_pases.sort(key=lambda x: x['porcentaje'], reverse=True)
 
     australia = {'Australia': australia_pases}
     argentina = {'Argentina': argentina_pases}
 
     print([australia, argentina])
+    
+
+    
 
 # Crear un nuevo archivo e escribir 50.000 eventos aleatorios
 def crearArchivo():
