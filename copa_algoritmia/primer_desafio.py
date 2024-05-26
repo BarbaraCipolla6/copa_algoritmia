@@ -131,11 +131,37 @@ def contarPases(eventos):
 
     print([australia, argentina])
 
+# Iniciamos el juego de penales, empezando por mostrar las zonas del arco al jugador
 def initPenales():
+    puntosArg = 0
+    puntosPB = 0
+
     print("\nEl partido ha empatado, empiezan los penales!")
     print("Abajo se encuentran las zonas del arco, elige hacia cual tirar para Argentina!")
-    print(f"Argentina: 0 Paises Bajos: 0\n")
+    print(f"Argentina: {str(puntosArg)} Paises Bajos: {str(puntosPB)}\n")
     print("[1, 2, 3]\n[4, 5, 6]\n[7, 8, 9,]\n")
+
+    final = False
+    inputValido = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    arcoCentro = ["2", "5", "8",]
+
+    # Bucle principal del juego
+    while final == False:
+        zonaArg = input("Ingresar el numero de zona: ")
+        if zonaArg in inputValido:
+            print(f"\nHas elegido tirar hacia la zona {zonaArg}!\n")
+            resPB = random.randint(1, 9)
+
+            if zonaArg in arcoCentro and str(resPB) in arcoCentro:
+                print("Paises Bajos ha atajado el tiro!\n")
+            elif zonaArg == str(resPB):
+                print("Paises Bajos ha atajado el tiro!\n")
+            elif zonaArg != str(resPB):
+                print("Gollllll Argentina!!!!!\n")
+                puntosArg += 1
+
+        else:
+            print("\nError: Ingresar el numero de zona (1-9)\n")
 
 
 # Crear un nuevo archivo e escribir 50.000 eventos aleatorios
