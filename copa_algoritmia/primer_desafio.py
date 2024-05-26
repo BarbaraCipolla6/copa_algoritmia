@@ -133,36 +133,82 @@ def contarPases(eventos):
 
 # Iniciamos el juego de penales, empezando por mostrar las zonas del arco al jugador
 def initPenales():
+    turno = "ARG"
+
     puntosArg = 0
     puntosPB = 0
 
     print("\nEl partido ha empatado, empiezan los penales!")
-    print("Abajo se encuentran las zonas del arco, elige hacia cual tirar para Argentina!")
+    print("Veras las zonas del arco, elige hacia cual tirar o atajar para Argentina!")
     print(f"Argentina: {str(puntosArg)} Paises Bajos: {str(puntosPB)}\n")
-    print("[1, 2, 3]\n[4, 5, 6]\n[7, 8, 9,]\n")
 
     final = False
     inputValido = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     arcoCentro = ["2", "5", "8",]
 
-    # Bucle principal del juego
-    while final == False:
+    # Defenimos las funciones para manejar cada accion de juego - de jugador y de PB
+    def tirar():
+        nonlocal puntosArg
+        nonlocal turno
+        print("Tiraras para Argentina. Las zonas del arco se encuentran abajo.")
+        print("Cuidado tirando hacia el centro, es mas facil atajar ahi.\n")
+        print("[1, 2, 3]\n[4, 5, 6]\n[7, 8, 9,]\n")
         zonaArg = input("Ingresar el numero de zona: ")
         if zonaArg in inputValido:
             print(f"\nHas elegido tirar hacia la zona {zonaArg}!\n")
             resPB = random.randint(1, 9)
 
             if zonaArg in arcoCentro and str(resPB) in arcoCentro:
-                print("Paises Bajos ha atajado el tiro!\n")
+                print("Paises Bajos ha atajado el tiro!")
+                print(f"Argentina: {str(puntosArg)} Paises Bajos: {str(puntosPB)}\n")
             elif zonaArg == str(resPB):
-                print("Paises Bajos ha atajado el tiro!\n")
+                print("Paises Bajos ha atajado el tiro!")
+                print(f"Argentina: {str(puntosArg)} Paises Bajos: {str(puntosPB)}\n")
             elif zonaArg != str(resPB):
-                print("Gollllll Argentina!!!!!\n")
+                print("Gollllll Argentina!!!!!")
                 puntosArg += 1
+                print(f"Argentina: {str(puntosArg)} Paises Bajos: {str(puntosPB)}\n")
+        else:
+            print("\nError: Ingresar el numero de zona (1-9)\n")
+        
+        turno = "PB"
 
+    def atajar():
+        nonlocal puntosPB
+        nonlocal turno
+        print("Intenteras atajar para Argentina. Las zonas del arco se encuentran abajo.\n")
+        print("[1, 2, 3]\n[4, 5, 6]\n[7, 8, 9,]\n")
+        zonaArg = input("Ingresar el numero de zona: ")
+        if zonaArg in inputValido:
+            print(f"\nHas elegido tirar hacia la zona {zonaArg}!\n")
+            resPB = random.randint(1, 9)
+
+            if zonaArg in arcoCentro and str(resPB) in arcoCentro:
+                print("Argentina ha atajado el tiro!")
+                print(f"Argentina: {str(puntosArg)} Paises Bajos: {str(puntosPB)}\n")
+            elif zonaArg == str(resPB):
+                print("Argentina ha atajado el tiro!")
+                print(f"Argentina: {str(puntosArg)} Paises Bajos: {str(puntosPB)}\n")
+            elif zonaArg != str(resPB):
+                print("Gollllll Paises Bajos!!!!!")
+                puntosPB += 1
+                print(f"Argentina: {str(puntosArg)} Paises Bajos: {str(puntosPB)}\n")
         else:
             print("\nError: Ingresar el numero de zona (1-9)\n")
 
+        turno = "ARG"
+
+    # Validamos si un equipo ha ganado
+    def validarPuntos():
+        print("VAL")
+
+    # Bucle principal del juego
+    while final == False:
+        if turno == "ARG":
+            tirar()
+        if turno == "PB":
+            atajar()
+        validarPuntos()
 
 # Crear un nuevo archivo e escribir 50.000 eventos aleatorios
 def crearArchivo():
