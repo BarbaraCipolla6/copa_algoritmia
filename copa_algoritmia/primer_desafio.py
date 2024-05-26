@@ -134,6 +134,7 @@ def contarPases(eventos):
 # Iniciamos el juego de penales, empezando por mostrar las zonas del arco al jugador
 def initPenales():
     turno = "ARG"
+    turno_cont = 0
 
     puntosArg = 0
     puntosPB = 0
@@ -143,6 +144,7 @@ def initPenales():
     print(f"Argentina: {str(puntosArg)} Paises Bajos: {str(puntosPB)}\n")
 
     final = False
+    empatados = False
     inputValido = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     arcoCentro = ["2", "5", "8",]
 
@@ -150,6 +152,7 @@ def initPenales():
     def tirar():
         nonlocal puntosArg
         nonlocal turno
+        nonlocal turno_cont
         print("Tiraras para Argentina. Las zonas del arco se encuentran abajo.")
         print("Cuidado tirando hacia el centro, es mas facil atajar ahi.\n")
         print("[1, 2, 3]\n[4, 5, 6]\n[7, 8, 9,]\n")
@@ -172,10 +175,13 @@ def initPenales():
             print("\nError: Ingresar el numero de zona (1-9)\n")
         
         turno = "PB"
+        turno_cont += 1
+        print(f"Turn: {turno_cont}")
 
     def atajar():
         nonlocal puntosPB
         nonlocal turno
+        nonlocal turno_cont
         print("Intenteras atajar para Argentina. Las zonas del arco se encuentran abajo.\n")
         print("[1, 2, 3]\n[4, 5, 6]\n[7, 8, 9,]\n")
         zonaArg = input("Ingresar el numero de zona: ")
@@ -197,18 +203,61 @@ def initPenales():
             print("\nError: Ingresar el numero de zona (1-9)\n")
 
         turno = "ARG"
+        turno_cont += 1
+        print(f"Turn: {turno_cont}")
 
     # Validamos si un equipo ha ganado
     def validarPuntos():
-        print("VAL")
+        nonlocal final
+
+        if turno_cont >= 6 and puntosArg - puntosPB >= 3:
+            final = True
+            print("ARG W")
+        elif turno_cont >= 6 and puntosPB - puntosArg >= 3:
+            final = True
+            print("PB W")
+
+        if turno_cont >= 8 and puntosArg - puntosPB >= 2:
+            final = True
+            print("ARG W")
+        elif turno_cont >= 8 and puntosPB - puntosArg >= 2:
+            final = True
+            print("PB W")
+
+        if turno_cont == 10 and puntosArg > puntosPB:
+            final = True
+            print("ARG W")
+        elif turno_cont == 10 and puntosPB > puntosArg:
+            final = True
+            print("PB W")
+        elif turno_cont == 10 and puntosArg == puntosPB:
+            final = True
+            empatados = True
+            print("Han empatado, desde ahora, el primer gol ganara!\n")
+
+            puntuajeArg = puntosArg
+            puntuajePB = puntosPB
+
+            # Bucle empatados (Ganar por primer gol)
+            while empatados:
+                if puntosArg > puntuajeArg:
+                    print("ARG W")
+                    break
+                if puntosPB > puntuajePB:
+                    print("PB W")
+                    break
+                if turno == "ARG" and puntosArg == puntuajeArg and puntosPB == puntuajePB:
+                    tirar()
+                if turno == "PB" and puntosArg == puntuajeArg and puntosPB == puntuajePB:
+                    atajar()
 
     # Bucle principal del juego
     while final == False:
-        if turno == "ARG":
-            tirar()
-        if turno == "PB":
-            atajar()
         validarPuntos()
+        if turno == "ARG" and final == False:
+            tirar()
+        if turno == "PB" and final == False:
+            atajar()
 
 # Crear un nuevo archivo e escribir 50.000 eventos aleatorios
 def crearArchivo():
