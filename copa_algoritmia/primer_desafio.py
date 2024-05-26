@@ -131,6 +131,13 @@ def contarPases(eventos):
 
     print([australia, argentina])
 
+def initPenales():
+    print("\nEl partido ha empatado, empiezan los penales!")
+    print("Abajo se encuentran las zonas del arco, elige hacia cual tirar para Argentina!")
+    print(f"Argentina: 0 Paises Bajos: 0\n")
+    print("[1, 2, 3]\n[4, 5, 6]\n[7, 8, 9,]\n")
+
+
 # Crear un nuevo archivo e escribir 50.000 eventos aleatorios
 def crearArchivo():
     archivo_pases = open("pases.txt", "w", encoding='utf-8')        
@@ -147,6 +154,8 @@ def crearArchivo():
 
     contarPases(eventos)
     archivo_pases.writelines(eventos)
+
+    initPenales()
 
 # Ejecutar programa
 if __name__ == "__main__":
