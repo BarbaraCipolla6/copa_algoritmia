@@ -146,8 +146,8 @@ def initPenales():
     arco_centro = ["2", "5", "8",]
 
     print("\nEl partido ha empatado, empiezan los penales!")
-    print("Veras las zonas del arco, elige hacia cual tirar o atajar para Argentina!")
-    print(f"Argentina: {str(puntos_arg)} Paises Bajos: {str(puntos_pb)}\n")
+    print("Verás las zonas del arco, elige hacia cual tirar o atajar para Argentina!")
+    print(f"Argentina: {str(puntos_arg)} Países Bajos: {str(puntos_pb)}\n")
 
     # Defenimos las funciones para manejar cada accion de juego - de jugador y de PB
     def tirar():
@@ -156,8 +156,8 @@ def initPenales():
         nonlocal turno_cont
         nonlocal turno_cont_arg
         nonlocal empatados
-        print("Tiraras para Argentina. Las zonas del arco se encuentran abajo.")
-        print("Cuidado tirando hacia el centro, es mas facil atajar ahi.\n")
+        print("Tirarás para Argentina. Las zonas del arco se encuentran abajo.")
+        print("Cuidado tirando hacia el centro, es más facil atajar ahi.\n")
         print("[1 2 3]\n[4 5 6]\n[7 8 9]\n")
         zonaArg = input("Ingresar el numero de zona: ")
         if zonaArg in input_valido:
@@ -165,15 +165,15 @@ def initPenales():
             resPB = random.randint(1, 9)
 
             if zonaArg in arco_centro and str(resPB) in arco_centro:
-                print("Paises Bajos ha atajado el tiro!")
-                print(f"Argentina: {str(puntos_arg)} Paises Bajos: {str(puntos_pb)}\n")
+                print("Países Bajos ha atajado el tiro!")
+                print(f"Argentina: {str(puntos_arg)} Países Bajos: {str(puntos_pb)}\n")
             elif zonaArg == str(resPB):
-                print("Paises Bajos ha atajado el tiro!")
-                print(f"Argentina: {str(puntos_arg)} Paises Bajos: {str(puntos_pb)}\n")
+                print("Países Bajos ha atajado el tiro!")
+                print(f"Argentina: {str(puntos_arg)} Países Bajos: {str(puntos_pb)}\n")
             elif zonaArg != str(resPB):
                 print("Gollllll Argentina!!!!!")
                 puntos_arg += 1
-                print(f"Argentina: {str(puntos_arg)} Paises Bajos: {str(puntos_pb)}\n")
+                print(f"Argentina: {str(puntos_arg)} Países Bajos: {str(puntos_pb)}\n")
         else:
             print("\nError: Ingresar el numero de zona (1-9)\n")
         
@@ -189,7 +189,7 @@ def initPenales():
         nonlocal turno_cont
         nonlocal turno_cont_pb
         nonlocal empatados
-        print("Intenteras atajar para Argentina. Las zonas del arco se encuentran abajo.\n")
+        print("Intentarás atajar para Argentina. Las zonas del arco se encuentran abajo.\n")
         print("[1 2 3]\n[4 5 6]\n[7 8 9]\n")
         zonaArg = input("Ingresar el numero de zona: ")
         if zonaArg in input_valido:
@@ -198,14 +198,14 @@ def initPenales():
 
             if zonaArg in arco_centro and str(resPB) in arco_centro:
                 print("Argentina ha atajado el tiro!")
-                print(f"Argentina: {str(puntos_arg)} Paises Bajos: {str(puntos_pb)}\n")
+                print(f"Argentina: {str(puntos_arg)} Países Bajos: {str(puntos_pb)}\n")
             elif zonaArg == str(resPB):
                 print("Argentina ha atajado el tiro!")
-                print(f"Argentina: {str(puntos_arg)} Paises Bajos: {str(puntos_pb)}\n")
+                print(f"Argentina: {str(puntos_arg)} Países Bajos: {str(puntos_pb)}\n")
             elif zonaArg != str(resPB):
-                print("Gollllll Paises Bajos!!!!!")
+                print("Gollllll Países Bajos!!!!!")
                 puntos_pb += 1
-                print(f"Argentina: {str(puntos_arg)} Paises Bajos: {str(puntos_pb)}\n")
+                print(f"Argentina: {str(puntos_arg)} Países Bajos: {str(puntos_pb)}\n")
         else:
             print("\nError: Ingresar el numero de zona (1-9)\n")
 
@@ -213,7 +213,7 @@ def initPenales():
         turno_cont += 1
         turno_cont_pb += 1
         if empatados == False:
-            print(f"Intentos Paises Bajos: {turno_cont_pb}/5")
+            print(f"Intentos Países Bajos: {turno_cont_pb}/5")
 
     # Validamos si un equipo ha ganado
     def validarPuntos():
@@ -244,7 +244,7 @@ def initPenales():
         elif turno_cont == 10 and puntos_arg == puntos_pb:
             final = True
             empatados = True
-            print("Han empatado, desde ahora, el primer gol ganara!\n")
+            print("Han empatado, desde ahora, el primer gol ganará!\n")
 
             puntuaje_arg = puntos_arg
             puntuaje_pb = puntos_pb
@@ -273,12 +273,12 @@ def initPenales():
     # Bucle para validar el ganador
     while True:
         if ganador == "ARG":
-            print("\nAgentina ha ganado!!!")
-            print(f"Final: Argentina: {str(puntos_arg)} Paises Bajos: {str(puntos_pb)}\n")
+            print("\nArgentina ha ganado!!!")
+            print(f"Final: Argentina: {str(puntos_arg)} Países Bajos: {str(puntos_pb)}\n")
             break
         if ganador == "PB":
-            print("\nPaises Bajos ha ganado!!!")
-            print(f"Final: Argentina: {str(puntos_arg)} Paises Bajos: {str(puntos_pb)}\n")
+            print("\nPaíses Bajos ha ganado!!!")
+            print(f"Final: Argentina: {str(puntos_arg)} Países Bajos: {str(puntos_pb)}\n")
             break
 
 # Crear un nuevo archivo e escribir 50.000 eventos aleatorios
