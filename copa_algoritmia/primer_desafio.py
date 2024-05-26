@@ -183,6 +183,8 @@ def initPenales():
         if empatados == False:
             print(f"Intentos Argentina: {turno_cont_arg}/5")
 
+        validarPuntos()
+
     def atajar():
         nonlocal puntos_pb
         nonlocal turno
@@ -214,6 +216,8 @@ def initPenales():
         turno_cont_pb += 1
         if empatados == False:
             print(f"Intentos Países Bajos: {turno_cont_pb}/5")
+        
+        validarPuntos()
 
     # Validamos si un equipo ha ganado
     def validarPuntos():
@@ -264,7 +268,6 @@ def initPenales():
 
     # Bucle principal del juego
     while final == False:
-        validarPuntos()
         if turno == "ARG" and final == False:
             tirar()
         if turno == "PB" and final == False:
